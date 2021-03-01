@@ -1,3 +1,4 @@
+import os
 from pydantic import BaseSettings
 
 
@@ -12,8 +13,8 @@ class ServerSettings(BaseSettings):
 
 
 class DatabaseSettings(BaseSettings):
-	DB_URL: str = 'mongodb://localhost:27017'
-	DB_NAME: str = 'tests'
+	DB_URL: str = os.getenv('MONGODB_URI', 'mongodb://localhost:27017')
+	DB_NAME: str = 'wedbook'
 
 
 class Settings(CommonSettings,ServerSettings,DatabaseSettings):
